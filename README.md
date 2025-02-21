@@ -52,7 +52,8 @@ result = SocialMiner::Instagram.profile_posts(user_id: "user_id")
 #       description: "Post caption",
 #       published_at: 2024-03-20 12:00:00
 #     }
-#   ]
+#   ],
+#   count: 1
 # }
 
 # To fetch next page:
@@ -73,7 +74,8 @@ result = SocialMiner::Instagram.post_comments(post_shortcode: "ABC123")
 #       body: "Great post!",
 #       published_at: 2024-03-20 12:00:00
 #     }
-#   ]
+#   ],
+#   count: 1
 # }
 
 # To fetch next page of comments:
@@ -85,7 +87,7 @@ next_page = SocialMiner::Instagram.post_comments(post_shortcode: "ABC123", curso
 You can pass custom headers to the requests by passing a hash to the `request_headers` option:
 
 ```ruby
-SocialMiner::Instagram.profile_info({ "Custom-Header" => "Header-Value" }, username: 'instagram')
+SocialMiner::Instagram.profile_info({ "Custom-Header" => "Header-Value" }, username: "instagram")
 ```
 
 # Custom Mapper

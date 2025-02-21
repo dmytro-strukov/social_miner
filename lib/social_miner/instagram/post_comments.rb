@@ -25,18 +25,24 @@ module SocialMiner
                                                   "xdt_shortcode_media",
                                                   "edge_media_to_parent_comment")
 
-          cursor = Helpers::Hash.fetch_nested(edge_media, "page_info", "end_cursor")
-                                .then { |data| JSON.parse(data) }
-                                .then { |data| data.fetch("server_cursor") }
+          has_next_page = Helpers::Hash.fetch_nested(edge_media, "page_info", "has_next_page")
+          next_page_cursor =
+            if has_next_page
+              Helpers::Hash.fetch_nested(edge_media, "page_info", "end_cursor")
+                           .then { |data| JSON.parse(data) }
+                           .then { |data| data.fetch("server_cursor") }
+            end
 
           records = edge_media.fetch("edges").map { |edge| edge.fetch("node") }
+          count   = edge_media.fetch("count")
 
           if block_given?
-            yield(records, cursor)
+            yield(records, next_page_cursor, count)
           else
             {
               records: records.map { |record| SocialMiner.mapper_for_klass(self.class).map(record) },
-              cursor: cursor
+              cursor: next_page_cursor,
+              count: count
             }
           end
         else

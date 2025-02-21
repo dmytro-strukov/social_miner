@@ -27,15 +27,19 @@ module SocialMiner
                                                       "user",
                                                       "edge_owner_to_timeline_media")
 
-          cursor  = Helpers::Hash.fetch_nested(timeline_media, "page_info", "end_cursor")
+          has_next_page = Helpers::Hash.fetch_nested(timeline_media, "page_info", "has_next_page")
+          next_page_cursor = Helpers::Hash.fetch_nested(timeline_media, "page_info", "end_cursor") if has_next_page
+
           records = timeline_media.fetch("edges").map { |attrs| attrs.fetch("node") }
+          count   = timeline_media.fetch("count")
 
           if block_given?
-            yield(records, cursor)
+            yield(records, next_page_cursor, count)
           else
             {
               records: records.map { |record| SocialMiner.mapper_for_klass(self.class).map(record) },
-              cursor: cursor
+              cursor: next_page_cursor,
+              count: count
             }
           end
         else

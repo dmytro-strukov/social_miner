@@ -7,7 +7,9 @@ RSpec.describe SocialMiner::Instagram::PostComments do
       "data" => {
         "xdt_shortcode_media" => {
           "edge_media_to_parent_comment" => {
+            "count" => 1,
             "page_info" => {
+              "has_next_page" => true,
               "end_cursor" => "{\"server_cursor\":\"next_page_token\"}"
             },
             "edges" => [
@@ -40,6 +42,7 @@ RSpec.describe SocialMiner::Instagram::PostComments do
     end
 
     it "fetches and maps comments correctly" do
+      expect(post_comments[:count]).to eq 1
       expect(post_comments[:cursor]).to eq("next_page_token")
       expect(post_comments[:records]).to contain_exactly(
         include(
