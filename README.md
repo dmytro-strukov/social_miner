@@ -96,6 +96,12 @@ You can use a custom mapper to transform the data into a custom structure.
 
 ```ruby
 module CustomMapper
+  def map_collection(records)
+    records.map { |record_attrs| map(record_attrs) }
+  end
+
+  module_function :map_collection
+
   def map(attrs)
     { id: attrs['id'] }
   end
@@ -107,8 +113,14 @@ end
 Use your custom mapper:
 
 ```ruby
+# One record
 SocialMiner::Instagram.profile_info(username: "instagram") do |profile_attrs|
   CustomMapper.map(profile_attrs)
+end
+
+# Many records
+SocialMiner::Instagram.profile_posts(user_id: "user_id") do |records, _cursor, _count|
+  CustomMapper.map_collection(records)
 end
 ```
 
