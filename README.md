@@ -34,6 +34,26 @@ result = SocialMiner::Instagram.profile_info(username: "instagram")
 # }
 ```
 
+Fetch user followers (requires authentication):
+
+```ruby
+result = SocialMiner::Instagram.profile_followers(
+  {
+    'cookie' => 'csrftoken=example_value; ds_user_id=example_value; sessionid=example_value',
+    'x-web-session-id' => 'example_value'
+  }, user_id: 123456789
+)
+# Result contains:
+# {
+#   social_id: "123456789",
+#   username: "instagram_username",
+#   full_name: "John Doe",
+#   avatar_url: "https://...",
+#   is_private: false,
+#   is_verified: false
+# }
+```
+
 To fetch a user's posts:
 
 ```ruby
