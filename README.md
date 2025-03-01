@@ -102,6 +102,10 @@ result = SocialMiner::Instagram.post_comments(post_shortcode: "ABC123")
 next_page = SocialMiner::Instagram.post_comments(post_shortcode: "ABC123", cursor: result[:cursor])
 ```
 
+# Proxy
+
+In `Net::HTTP` you can pass env variables http_proxy, https_proxy. https://ruby-doc.org/stdlib-2.4.3/libdoc/net/http/rdoc/Net/HTTP.html
+
 # Custom Headers
 
 You can pass custom headers to the requests by passing a hash to the `request_headers` option:
