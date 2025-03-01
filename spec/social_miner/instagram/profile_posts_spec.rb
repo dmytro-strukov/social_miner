@@ -36,7 +36,7 @@ RSpec.describe SocialMiner::Instagram::ProfilePosts do
       stub_request(:get, /#{described_class::GRAPHQL_URL}.*/)
         .with(
           query: hash_including(
-            "query_hash" => described_class::QUERY_HASH,
+            "doc_id" => described_class::QUERY_HASH,
             "variables" => { id: user_id, first: described_class::PER_PAGE }.to_json
           )
         )

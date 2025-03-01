@@ -102,6 +102,14 @@ result = SocialMiner::Instagram.post_comments(post_shortcode: "ABC123")
 next_page = SocialMiner::Instagram.post_comments(post_shortcode: "ABC123", cursor: result[:cursor])
 ```
 
+# Proxy Configuration
+
+```ruby
+SocialMiner.configure do |config|
+  config.proxy = "https://user:pass@host:port"
+end
+```
+
 # Custom Headers
 
 You can pass custom headers to the requests by passing a hash to the `request_headers` option:

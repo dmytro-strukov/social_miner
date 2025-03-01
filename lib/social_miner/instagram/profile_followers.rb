@@ -22,7 +22,7 @@ module SocialMiner
                                           [:max_id, next_max_id]
                                         ])
 
-        response = Net::HTTP.get_response(uri, request_headers)
+        response = get_response(uri)
 
         case response
         when Net::HTTPSuccess

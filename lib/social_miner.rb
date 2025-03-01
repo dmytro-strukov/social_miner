@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "social_miner/version"
-
 require_relative "social_miner/helpers/hash"
+require_relative "social_miner/configuration"
 
 require_relative "social_miner/instagram/base"
 require_relative "social_miner/instagram/profile_info"
@@ -28,6 +28,10 @@ module SocialMiner
 
   module_function :mapper_for_klass
 
+  def self.configure(&)
+    Configuration.configure(&)
+  end
+
   # Requires authentication
   def Instagram.profile_followers(request_headers = {}, **args, &)
     Instagram::ProfileFollowers.new(request_headers).call(**args, &)
@@ -45,3 +49,7 @@ module SocialMiner
     Instagram::PostComments.new(request_headers).call(**args, &)
   end
 end
+
+# SocialMiner.configure do |config|
+#   config.proxy = "http://customer-pwned_OpVTw-cc-GE:x=g_uydSg9A5_SQ@pr.oxylabs.io:7777"
+# end

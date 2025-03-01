@@ -14,7 +14,7 @@ module SocialMiner
           "doc_id" => DOC_ID
         }
 
-        response = Net::HTTP.post_form(URI(GRAPHQL_URL), data)
+        response = post_response(URI(GRAPHQL_URL), data)
 
         case response
         when Net::HTTPSuccess

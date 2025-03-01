@@ -11,7 +11,7 @@ module SocialMiner
                                           [:username, username]
                                         ])
 
-        response = Net::HTTP.get_response(uri, request_headers)
+        response = get_response(uri)
 
         case response
         when Net::HTTPSuccess

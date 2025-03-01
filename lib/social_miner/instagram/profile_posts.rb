@@ -4,7 +4,7 @@ module SocialMiner
   module Instagram
     class ProfilePosts < Base
       PER_PAGE = 12
-      QUERY_HASH = "69cba40317214236af40e7efa697781d"
+      QUERY_HASH = "7950326061742207"
 
       def call(user_id:, cursor: nil)
         uri = URI(GRAPHQL_URL)
@@ -13,11 +13,11 @@ module SocialMiner
         variables[:after] = cursor if cursor
 
         uri.query = URI.encode_www_form([
-                                          [:query_hash, QUERY_HASH],
+                                          [:doc_id, QUERY_HASH],
                                           [:variables, variables.to_json]
                                         ])
 
-        response = Net::HTTP.get_response(uri, request_headers)
+        response = get_response(uri)
 
         case response
         when Net::HTTPSuccess
