@@ -6,7 +6,7 @@ RSpec.describe SocialMiner::Configuration do
 
     it "configures proxy with valid URL" do
       proxy_url = "http://user:pass@proxy.example.com:8080"
-      
+
       described_class.configure do |config|
         config.proxy = proxy_url
       end
@@ -21,4 +21,4 @@ RSpec.describe SocialMiner::Configuration do
       expect(proxy.port).to eq(8080)
     end
   end
-end 
+end

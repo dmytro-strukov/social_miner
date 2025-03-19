@@ -49,7 +49,3 @@ module SocialMiner
     Instagram::PostComments.new(request_headers).call(**args, &)
   end
 end
-
-# SocialMiner.configure do |config|
-#   config.proxy = "http://customer-pwned_OpVTw-cc-GE:x=g_uydSg9A5_SQ@pr.oxylabs.io:7777"
-# end
